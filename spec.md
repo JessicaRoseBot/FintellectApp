@@ -1,7 +1,5 @@
 # Personal Finance Visualizer & Analyzer
 
-------------
-
 ### Project Description
 A web app that allows users to upload their bank statements (CSV format) and get
 categorized insights into their spending habits. It provides visual breakdowns (e.g.,
@@ -39,11 +37,13 @@ recommendations.
 Primary Interaction
 File upload → View dashboard → Adjust categories → Download report (loop possible
 monthly).
-Data
+
+### Data
 - Input: CSV from banks (common export format).
 - Processing: Categorize by keyword matching (e.g., “Netflix” = subscription), monthly
 summaries, visualizations.
-Results
+
+### Results
 - Pie chart of spending categories.
 - Line chart of monthly spending.
 - Budget alerts or savings suggestions.
