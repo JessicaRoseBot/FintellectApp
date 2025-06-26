@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Upload Bank Statement</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <input type="file" class="form-control" name="file" accept=".csv">
+        </div>
+        <button type="submit" class="btn btn-primary">Analyze</button>
+    </form>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} mt-3">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+{% endblock %}
