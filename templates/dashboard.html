@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    {{ bootstrap.load_css() }}
+</head>
+<body>
+    <div class="container mt-4">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <h1>Financial Dashboard</h1>
+        
+        <div class="row mt-4">
+            <div class="col-md-6">
+                {{ pie|safe }}
+            </div>
+            <div class="col-md-6">
+                {{ timeline|safe }}
+            </div>
+        </div>
+        
+        <a href="{{ url_for('upload_file') }}" class="btn btn-primary mt-3">
+            Upload New Statement
+        </a>
+    </div>
+    
+    {{ bootstrap.load_js() }}
+</body>
+</html>

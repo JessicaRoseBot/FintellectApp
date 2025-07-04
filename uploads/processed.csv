@@ -1,0 +1,48 @@
+date,description,amount,auto_category,bank_category,transaction_type,needs_review
+2025-01-31,WHOLEFDS TMC 10207,-27.18,Groceries,Groceries,Expense,False
+2025-01-31,SQ *CORVUS COFFEE ROASTER,-12.08,Eating Out,Food & Drink,Expense,False
+2025-01-30,PUDGE BROS PIZZA - DTC,-37.0,Eating Out,Food & Drink,Expense,False
+2025-01-30,TARGET.COM  *,-38.26,Shopping,Shopping,Expense,False
+2025-01-29,AMAZON MKTPL*ZC1KD3O91,-46.12,Amazon,Shopping,Expense,True
+2025-01-27,Stampede,-10.0,Food & Drink,Food & Drink,Expense,False
+2025-01-26,TRADER JOE S #303,-107.56,Groceries,Groceries,Expense,False
+2025-01-26,TST*URBAN EGG - BELLEVIE,-43.0,Eating Out,Food & Drink,Expense,False
+2025-01-28,AMAZON MKTPL*Z77U43EC2,-28.65,Amazon,Shopping,Expense,True
+2025-01-27,AMAZON MKTPL*ZC3N47T80,-55.73,Amazon,Shopping,Expense,True
+2025-01-27,FREETAXUSA.COM,-14.99,Professional Services,Professional Services,Expense,False
+2025-01-25,Payment Thank You-Mobile,903.05,,,Income,False
+2025-01-23,CHEWY.COM,-76.67,Shopping,Shopping,Expense,False
+2025-01-23,Amazon.com*ZG2MH4421,-13.04,Amazon,Shopping,Expense,True
+2025-01-22,Amazon.com*Z54UE6RF1,-80.9,Amazon,Shopping,Expense,True
+2025-01-22,Spotify USA,-5.99,Bills & Utilities,Bills & Utilities,Expense,False
+2025-01-20,SJC PEETS B TMP 6631309,-4.36,Eating Out,Food & Drink,Expense,False
+2025-01-20,IN-N-OUT SEASIDE,-12.84,Food & Drink,Food & Drink,Expense,False
+2025-01-18,PAYPAL *STARBUCKS,-20.0,Eating Out,Food & Drink,Expense,False
+2025-01-17,TRADER JOE S #204,-49.21,Groceries,Groceries,Expense,False
+2025-01-17,PANDA EXPRESS #3222,-11.58,Eating Out,Food & Drink,Expense,False
+2025-01-16,EINSTEIN'S C CONCOURSE,-5.5,Food & Drink,Food & Drink,Expense,False
+2025-01-15,AMAZON MKTPLACE PMTS,22.83,Amazon,Shopping,Income,True
+2025-01-15,AMAZON MKTPLACE PMTS,13.05,Amazon,Shopping,Income,True
+2025-01-15,DISCOUNT-TIRE-CO COD-13,-16.16,Automotive,Automotive,Expense,False
+2025-01-14,TRADER JOE S #303,-49.24,Groceries,Groceries,Expense,False
+2025-01-15,AMAZON MKTPLACE PMTS,23.93,Amazon,Shopping,Income,True
+2025-01-15,AMAZON MKTPLACE PMTS,38.28,Amazon,Shopping,Income,True
+2025-01-14,CTLP*ADVENTURE PRODUCT,-3.0,Food & Drink,Food & Drink,Expense,False
+2025-01-13,Stampede,-10.0,Food & Drink,Food & Drink,Expense,False
+2025-01-13,WASH LAUNDRY MOBILE,-15.0,Personal,Personal,Expense,False
+2025-01-13,TST*ALOY THAI EATERY - C,-23.76,Eating Out,Food & Drink,Expense,False
+2025-01-14,ACE HARDWARE,-11.2,Home,Home,Expense,False
+2025-01-13,TARGET.COM  *,-22.1,Shopping,Shopping,Expense,False
+2025-01-13,TARGET.COM  *,-16.36,Shopping,Shopping,Expense,False
+2025-01-13,TARGET.COM  *,-9.49,Shopping,Shopping,Expense,False
+2025-01-11,CATRINAS MEXICAN GRILL,-8.0,Eating Out,Food & Drink,Expense,False
+2025-01-11,SQ *THE TABLETOP TAP,-26.0,Food & Drink,Food & Drink,Expense,False
+2025-01-10,DOLLAR TREE,-6.82,Shopping,Shopping,Expense,False
+2025-01-09,TARGET.COM  *,-80.78,Shopping,Shopping,Expense,False
+2025-01-09,TARGET.COM  *,-5.0,Shopping,Shopping,Expense,False
+2025-01-08,TARGET        00028209,-28.4,Shopping,Shopping,Expense,False
+2025-01-08,NATIONAL WESTERN STOCK SH,-174.0,Entertainment,Entertainment,Expense,False
+2025-01-06,Stampede,-10.0,Food & Drink,Food & Drink,Expense,False
+2025-01-06,PAYPAL *AMC THEATRE,-4.38,Eating Out,Entertainment,Expense,False
+2025-01-03,AMAZON MKTPL*ZD7648AO2,-27.56,Amazon,Shopping,Expense,True
+2025-01-01,KING SOOPERS #0100,-120.91,Groceries,Groceries,Expense,False
