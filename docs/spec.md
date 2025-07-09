@@ -4,7 +4,7 @@ A data-driven personal finance app that transforms raw bank statements into acti
 ### General Description
 The Personal Finance Visualizer is a web application that helps users gain insights into their spending habits by analyzing bank statement data. Users upload CSV files (standard bank statement format) which are automatically categorized and visualized through interactive dashboards. The system provides monthly spending breakdowns, category trends, and budget alerts.
 
-The core technology stack will use Python with Flask for the web interface, pandas for data processing, and Plotly for interactive visualizations. For categorization, we'll implement rule-based matching (e.g., "Netflix" → "Entertainment") we will pull in the categories from bank statements, adding clarity where we can for regular purchases that can get more specific, and also allow the user to manually pick which category an expense fits into. The minimal viable product will be a web app deployable to PythonAnywhere, with potential for future mobile adaptation using Bootstrap.
+The core technology stack will use Python with Flask for the web interface, pandas for data processing, and Plotly for interactive visualizations. For categorization, we will pull in the categories from bank statements, adding clarity where we can for regular purchases that can get more specific, and also allow the user to manually pick which category an expense fits into. The minimal viable product will be a web app deployable to PythonAnywhere, with potential for future mobile adaptation using Bootstrap.
 
 Key external packages: Flask, pandas, Plotly, matplotlib, csv, Bootstrap. No external APIs required for v1. The GUI will be browser-based with file upload capabilities. A CLI version could be implemented for batch processing, but wouldn't serve the visualization needs. Future versions could expose an API for programmatic access to the analysis engine.
 
@@ -20,13 +20,12 @@ Temporary storage of processed data in session** (unsure how possible this is to
 
 [Wireframe description: File upload button → Processing spinner → Basic categorization table] 
 #### 2. Category Review and Adjustment
-After initial processing, Sarah reviews the automatic categorizations. She notices "Amazon" transactions were all categorized as "Shopping" but wants to split them between "Books" and "Electronics". She selects transactions and uses a dropdown to recategorize them. The system learns from her adjustments for future imports.
+After initial processing, Sarah reviews the automatic categorizations. She notices "Amazon" transactions were all categorized as "Shopping" but wants to split them between "Books" and "Electronics".
 Following CSV import, user is able to adjust the data in a spreadsheet-like view and re-categorize purchases as needed.
 Technical Details:
 Interactive data table display
 Category override interface
 Session persistence of user changes** (unsure how possible this is)
-Simple "learning" by saving user overrides to a profile
 Undo/redo capability for corrections
 
 [Wireframe description: Table view with category dropdowns + "Apply Changes" button] 
@@ -37,7 +36,6 @@ Plotly interactive charts
 Responsive dashboard layout
 Tooltip hover information
 Time period selectors (at least an indication of more data, like $ amounts behind %s)
-Export options (PNG, PDF)
 
 [Wireframe description: Main dashboard with 3 chart areas + time filters]
 
@@ -73,15 +71,11 @@ User config: JSON (categories, rules, budgets)
 Implementation Plan & Assessment
 Version 1: Flask web interface with file upload
 Basic categorization rules
-Static visualizations (matplotlib)
 Manual category adjustment (moved to v2)
 
 ### Version 2: Enhancements with interactivity and responsive design
 Interactive Plotly dashboards
 Manual category adjustment
-User profiles for saving preferences
-Budget tracking/alerts
-Improved categorization learning
 Bootstrap for responsive design
 
 ### Self Assessment
