@@ -6,7 +6,7 @@ The Personal Finance Visualizer is a web application that helps users gain insig
 
 The core technology stack will use Python with Flask for the web interface, pandas for data processing, and Plotly for interactive visualizations. For categorization, we will pull in the categories from bank statements, adding clarity where we can for regular purchases that can get more specific, and also allow the user to manually pick which category an expense fits into. The minimal viable product will be a web app deployable to PythonAnywhere, with potential for future mobile adaptation using Bootstrap.
 
-Key external packages: Flask, pandas, Plotly, matplotlib, csv, Bootstrap. No external APIs required for v1. The GUI will be browser-based with file upload capabilities. A CLI version could be implemented for batch processing, but wouldn't serve the visualization needs. Future versions could expose an API for programmatic access to the analysis engine.
+Key external packages: Flask, pandas, Plotly, csv, Bootstrap. No external APIs required for v1. The GUI will be browser-based with file upload capabilities. A CLI version could be implemented for batch processing, but wouldn't serve the visualization needs. Future versions could expose an API for programmatic access to the analysis engine.
 
 ### Task Vignettes
 #### 1. Data Upload and Initial Categorization
