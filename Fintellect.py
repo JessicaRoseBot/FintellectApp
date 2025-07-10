@@ -1,10 +1,9 @@
 import os
 import pandas as pd
 from flask import Flask, render_template, request, flash, redirect, url_for
-from flask_bootstrap import Bootstrap4
+from flask_bootstrap import Bootstrap
 import plotly.express as px
 from werkzeug.utils import secure_filename
-import numpy as np  
 
 # Initialize Flask app
 app = Flask(__name__, template_folder='templates')
@@ -18,7 +17,11 @@ app.config.update(
 )
 
 # Initialize extensions
-bootstrap = Bootstrap4(app)
+bootstrap = Bootstrap(app)
+
+@app.context_processor
+def inject_bootstrap():
+    return dict(bootstrap=bootstrap)
 
 # Ensure upload folder exists
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
@@ -45,6 +48,7 @@ def process_statement(file_stream):
         'category': 'bank_category',
         'type': 'transaction_type'
     }
+    
     # Only rename columns that exist in the dataframe
     df = df.rename(columns={k:v for k,v in column_mapping.items() if k in df.columns})
     
@@ -55,35 +59,37 @@ def process_statement(file_stream):
         raise ValueError(f"Missing required columns: {', '.join(missing)}")
     
     # Data cleaning
-    df['amount'] = df['amount'].replace('[\$,]', '', regex=True).astype(float)
+    df['amount'] = df['amount'].replace(r'[\$,]', '', regex=True).astype(float)
     df['date'] = pd.to_datetime(df['date'])
     
-    # Enhanced categorization - with fallback to bank categories
+    # Enhanced categorization
     food_keywords = ['restaurant', 'cafe', 'coffee', 'bar', 'grill', 'eat', 'food', 'dining',
                    'pizza', 'burger', 'starbucks', 'peets', 'egg', 'thai', 'grill', 'panda']
     
-    # Initialize auto_category with bank_category if it exists, otherwise 'Uncategorized'
+    grocery_keywords = ['wholefds', 'trader joe', 'king soopers']
+    
+    # Initialize auto_category
     if 'bank_category' in df.columns:
         df['auto_category'] = df['bank_category']
     else:
         df['auto_category'] = 'Uncategorized'
     
-    # Apply food categorization
+    # Apply categorization rules
     food_mask = df['description'].str.contains('|'.join(food_keywords), case=False, na=False)
-    df.loc[food_mask, 'auto_category'] = 'Eating Out'
-    
-    # Special handling for grocery stores
-    grocery_keywords = ['wholefds', 'trader joe', 'king soopers']
     grocery_mask = df['description'].str.contains('|'.join(grocery_keywords), case=False, na=False)
-    df.loc[grocery_mask, 'auto_category'] = 'Groceries'
-    
-    # Special handling for Amazon
     amazon_mask = df['description'].str.contains('amazon', case=False, na=False)
-    df.loc[amazon_mask, 'auto_category'] = 'Amazon'
-    df['needs_review'] = amazon_mask  # Flag Amazon purchases for review
     
-    # Type normalization
-    type_mapping = {'sale': 'Expense', 'payment': 'Income', 'return': 'Income'}
+    df.loc[food_mask, 'auto_category'] = 'Eating Out'
+    df.loc[grocery_mask, 'auto_category'] = 'Groceries'
+    df.loc[amazon_mask, 'auto_category'] = 'Amazon'
+    df['needs_review'] = amazon_mask
+    
+    # Remove payments before type normalization
+    if 'transaction_type' in df.columns:
+        df = df[~df['transaction_type'].str.lower().eq('payment')]
+    
+    # Then proceed with type normalization for remaining transactions
+    type_mapping = {'sale': 'Expense', 'return': 'Income'}
     if 'transaction_type' in df.columns:
         df['transaction_type'] = df['transaction_type'].str.lower().map(type_mapping).fillna('Unknown')
     
@@ -91,7 +97,6 @@ def process_statement(file_stream):
     keep_cols = ['date', 'description', 'amount', 'auto_category', 
                 'bank_category', 'transaction_type', 'needs_review']
     return df[[col for col in keep_cols if col in df.columns]]
-
 
 # ======================
 # Routes
@@ -112,30 +117,32 @@ def upload_file():
             
         if file and allowed_file(file.filename):
             try:
-                # Secure the filename before saving
                 filename = secure_filename(file.filename)
                 temp_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
                 file.save(temp_path)
                 
-                # Process and save
                 df = process_statement(temp_path)
                 processed_path = os.path.join(app.config['UPLOAD_FOLDER'], 'processed.csv')
                 df.to_csv(processed_path, index=False)
                 
                 flash('File processed successfully!', 'success')
-                return redirect(url_for('dashboard'))  # <-- Fixed redirect
+                return redirect(url_for('dashboard'))
                 
             except Exception as e:
                 flash(f'Error processing file: {str(e)}', 'error')
         else:
             flash('Only CSV files allowed', 'error')
     
-    return render_template('upload.html')
+    return render_template('upload_CH.html')
 
 @app.route('/dashboard')
 def dashboard():
     try:
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], 'processed.csv')
+        if not os.path.exists(filepath):
+            flash('No processed data found. Please upload a file first.', 'error')
+            return redirect(url_for('upload_file'))
+        
         df = pd.read_csv(filepath)
         
         # Ensure required columns exist
@@ -143,18 +150,95 @@ def dashboard():
         missing = [col for col in required_cols if col not in df.columns]
         if missing:
             raise ValueError(f"Missing columns: {', '.join(missing)}")
+        else:
+            print("All required columns are present.")
+        
+        # Fill missing categories
+        df['auto_category'] = df['auto_category'].fillna('Uncategorized')
         
         # Create visualizations
         charts = {}
-        charts['pie'] = px.pie(df, values='amount', names='auto_category',
-                             title='Spending by Category').to_html(full_html=False)
         
+        # 1. Overall Pie Chart
+        df_pie = df.copy()
+        df_pie['amount'] = df_pie['amount'].abs()
+        pie_data = df_pie.groupby('auto_category', as_index=False)['amount'].sum()
+        
+        charts['pie'] = px.pie(
+            pie_data,
+            values='amount',
+            names='auto_category',
+            title='Spending by Category (Percentage of Total)'
+        ).update_traces(textinfo='percent+label').to_html(full_html=False)
+        
+        # 2. Expense Pie Chart
+        # if 'transaction_type' in df.columns:
+            # df_expense = df[df['transaction_type'] == 'Expense'].copy()
+            # df_expense['amount'] = df_expense['amount'].abs()
+            # pie_data_expense = df_expense.groupby('auto_category', as_index=False)['amount'].sum()
+            
+            # charts['pie_exp'] = px.pie(
+               # pie_data_expense,
+               # values='amount',
+               # names='auto_category',
+               # title='Expenses by Category (Percentage of Total)'
+            # ).update_traces(textinfo='percent+label').to_html(full_html=False)
+            
+            # 3. Income Pie Chart - TBD
+            # df_income = df[df['transaction_type'] == 'Income'].copy()
+            # df_income['amount'] = df_income['amount'].abs()
+            # pie_data_income = df_income.groupby('auto_category', as_index=False)['amount'].sum()
+            
+            #charts['pie_inc'] = px.pie(
+               # pie_data_income,
+               # values='amount',
+               # names='auto_category',
+               # title='Income by Category (Percentage of Total)'
+            # ).update_traces(textinfo='percent+label').to_html(full_html=False)
+        
+        # 4. Time Series Charts
         if 'date' in df.columns:
-            df['date'] = pd.to_datetime(df['date'])  # Ensure datetime
-            charts['timeline'] = px.line(df, x='date', y='amount',
-                                       title='Daily Spending').to_html(full_html=False)
+            df['date'] = pd.to_datetime(df['date'])
+            
+            # Daily Expenses
+            df_expense = df[df['transaction_type'] == 'Expense'].copy()
+            df_expense['amount'] = df_expense['amount'].abs()
+            df_daily = df_expense.groupby('date', as_index=False)['amount'].sum().sort_values('date')
+            
+            charts['timeline'] = px.line(
+                df_daily, 
+                x='date', 
+                y='amount',
+                title='Daily Spending'
+            ).to_html(full_html=False)
+            
+            # Cumulative Expenses
+            df_daily['cumulative'] = df_daily['amount'].cumsum()
+            charts['timeline_accumulated'] = px.line(
+                df_daily, 
+                x='date', 
+                y='cumulative',
+                color_discrete_sequence=['red'],
+                title='Daily Spending (Accumulated)'
+            ).to_html(full_html=False)
+            
+            # Combined Daily and Cumulative
+            df_long = df_daily.melt(
+                id_vars='date',
+                value_vars=['amount', 'cumulative'],
+                var_name='Type',
+                value_name='Value'
+            )
+            
+            charts['timeline_combined'] = px.line(
+                df_long,
+                x='date',
+                y='Value',
+                color='Type',
+                title='Daily and Cumulative Spending'
+            ).to_html(full_html=False)
         
-        return render_template('dashboard.html', **charts)
+        return render_template('dashboard_CH.html', charts=charts)
         
     except Exception as e:
         flash(f'Dashboard error: {str(e)}', 'error')
@@ -165,10 +249,10 @@ def show_results():
     filepath = os.path.join(app.config['UPLOAD_FOLDER'], 'processed.csv')
     if os.path.exists(filepath):
         df = pd.read_csv(filepath)
-        return render_template('results.html', tables=[df.to_html(classes='data')])
+        return render_template('results_CH.html', tables=[df.to_html(classes='data')])
     else:
         flash('No processed data found', 'error')
         return redirect(url_for('upload_file'))
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True,port=8000)

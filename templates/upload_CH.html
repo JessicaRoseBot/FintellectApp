@@ -1,13 +1,199 @@
-{% extends "base.html" %}
+{% extends "bootstrap/base.html" %}
 
-{% block title %}Upload Bank Statement{% endblock %}
+{% block styles %}
+{{ super() }}
+<style>
+    .upload-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 40px;
+    }
+    .upload-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+        padding: 40px;
+        text-align: center;
+    }
+    .upload-icon {
+        font-size: 48px;
+        color: #4CAF50;
+        margin-bottom: 20px;
+    }
+    .upload-title {
+        color: #2c3e50;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    .upload-subtitle {
+        color: #7f8c8d;
+        margin-bottom: 30px;
+        font-size: 16px;
+    }
+    .file-upload-wrapper {
+        position: relative;
+        margin-bottom: 30px;
+    }
+    .file-upload-input {
+        width: 100%;
+        height: 180px;
+        border: 2px dashed #ddd;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        transition: all 0.3s ease;
+    }
+    .file-upload-input:hover {
+        border-color: #4CAF50;
+        background: #f9f9f9;
+    }
+    .file-upload-input.has-file {
+        border-color: #4CAF50;
+        background: #f0f8f0;
+    }
+    .upload-btn {
+        background: #4CAF50;
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 30px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+    }
+    .upload-btn:hover {
+        background: #3d8b40;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+    }
+    .file-name {
+        margin-top: 15px;
+        font-size: 14px;
+        color: #4CAF50;
+        font-weight: 500;
+    }
+    .supported-formats {
+        margin-top: 20px;
+        font-size: 13px;
+        color: #95a5a6;
+    }
+    .flash-messages {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        min-width: 300px;
+    }
+</style>
+{% endblock %}
 
 {% block content %}
-    <h1>Upload Bank Statement</h1>
-    <form method="POST" enctype="multipart/form-data">
-        <div class="mb-3">
-            <input class="form-control" type="file" name="file" accept=".csv">
+<div class="flash-messages">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span>&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+
+<div class="upload-container">
+    <div class="upload-card">
+        <div class="upload-icon">
+            <i class="fas fa-file-upload"></i>
         </div>
-        <button type="submit" class="btn btn-primary">Upload</button>
-    </form>
+        <h2 class="upload-title">Upload Your Statement</h2>
+        <p class="upload-subtitle">Get insights into your spending habits by uploading your bank statement</p>
+        
+        <form method="POST" enctype="multipart/form-data" id="uploadForm">
+            <div class="file-upload-wrapper">
+                <label for="fileInput" class="file-upload-input" id="dropArea">
+                    <i class="fas fa-cloud-upload-alt" style="font-size: 36px; margin-bottom: 10px; color: #95a5a6;"></i>
+                    <span>Drag & drop your file here</span>
+                    <span class="supported-formats">or click to browse (CSV only)</span>
+                    <span class="file-name" id="fileName"></span>
+                </label>
+                <input type="file" id="fileInput" name="file" accept=".csv" style="display: none;">
+            </div>
+            
+            <button type="submit" class="upload-btn" id="submitBtn" disabled>
+                <i class="fas fa-chart-line"></i> Analyze Statement
+            </button>
+        </form>
+    </div>
+</div>
+
+{% block scripts %}
+{{ super() }}
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script>
+    // File input handling
+    const fileInput = document.getElementById('fileInput');
+    const dropArea = document.getElementById('dropArea');
+    const fileName = document.getElementById('fileName');
+    const submitBtn = document.getElementById('submitBtn');
+    
+    // Click handler
+    dropArea.addEventListener('click', () => fileInput.click());
+    
+    // File selection handler
+    fileInput.addEventListener('change', (e) => {
+        if (fileInput.files.length) {
+            fileName.textContent = fileInput.files[0].name;
+            dropArea.classList.add('has-file');
+            submitBtn.disabled = false;
+        }
+    });
+    
+    // Drag and drop handlers
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropArea.addEventListener(eventName, highlight, false);
+    });
+    
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, unhighlight, false);
+    });
+    
+    function highlight(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        dropArea.classList.add('highlight');
+    }
+    
+    function unhighlight(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        dropArea.classList.remove('highlight');
+        
+        if (e.type === 'drop') {
+            fileInput.files = e.dataTransfer.files;
+            if (fileInput.files.length) {
+                fileName.textContent = fileInput.files[0].name;
+                dropArea.classList.add('has-file');
+                submitBtn.disabled = false;
+            }
+        }
+    }
+    
+    // Prevent default drag behaviors
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, preventDefaults, false);
+        document.body.addEventListener(eventName, preventDefaults, false);
+    });
+    
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+</script>
+{% endblock %}
 {% endblock %}

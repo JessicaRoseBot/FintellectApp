@@ -87,8 +87,12 @@ def process_statement(file_stream):
     df.loc[amazon_mask, 'auto_category'] = 'Amazon'
     df['needs_review'] = amazon_mask  # Flag Amazon purchases for review
     
-    # Type normalization
-    type_mapping = {'sale': 'Expense', 'payment': 'Income', 'return': 'Income'}
+    # Remove payments before type normalization
+    if 'transaction_type' in df.columns:
+        df = df[~df['transaction_type'].str.lower().eq('payment')]
+    
+    # Then proceed with type normalization for remaining transactions
+    type_mapping = {'sale': 'Expense', 'return': 'Income'}
     if 'transaction_type' in df.columns:
         df['transaction_type'] = df['transaction_type'].str.lower().map(type_mapping).fillna('Unknown')
     
@@ -149,9 +153,17 @@ def dashboard():
         if missing:
             raise ValueError(f"Missing columns: {', '.join(missing)}")
         
+        # in auto_category replace missing values with 'Uncategorized'
+        df['auto_category'] = df['auto_category'].fillna('Uncategorized')   
+        
+        # Group by auto_category and sum the absolute value of amount
+        df_pie = df.copy()
+        df_pie['amount'] = df_pie['amount'].abs() # so that spend amounts are positive for pie chart
+        pie_data = df_pie.groupby('auto_category', as_index=False)['amount'].sum()
+
         # Create visualizations
         charts = {}
-        charts['pie'] = px.pie(df, values='amount', names='auto_category',
+        charts['pie'] = px.pie(pie_data, values='amount', names='auto_category',
                              title='Spending by Category').to_html(full_html=False)
         
         if 'date' in df.columns:
@@ -176,4 +188,4 @@ def show_results():
         return redirect(url_for('upload_file'))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True,)

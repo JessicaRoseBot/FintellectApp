@@ -1,20 +1,83 @@
-{% extends "base.html" %}
+{% extends "bootstrap/base.html" %}
 
 {% block title %}Financial Dashboard{% endblock %}
 
-{% block content %}
-    <h1>Financial Dashboard</h1>
+{% block styles %}
+{{ super() }}
+<style>
+    .dashboard-header {
+        background-color: #f8f9fa;
+        padding: 20px 0;
+        margin-bottom: 30px;
+        border-bottom: 1px solid #eee;
+    }
+    .chart-container {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        padding: 20px;
+        margin-bottom: 30px;
+        height: 100%;
+    }
+    .chart-title {
+        color: #2c3e50;
+        margin-bottom: 20px;
+        font-weight: 600;
+    }
+    .row-equal {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .row-equal > [class*='col-'] {
+        display: flex;
+        flex-direction: column;
+    }
+</style>
+{% endblock %}
 
-    <div class="row mt-4">
-        <div class="col-md-6">
-            {{ pie|safe }}
-        </div>
-        <div class="col-md-6">
-            {{ timeline|safe }}
+{% block content %}
+<div class="dashboard-header">
+    <div class="container">
+        <h1>Financial Dashboard</h1>
+        <p class="lead">Visualizing your spending patterns</p>
+    </div>
+</div>
+
+<div class="container">
+    <!-- First Row - Pie Chart -->
+    <div class="row row-equal">
+        <div class="col-md-12">
+            <div class="chart-container">
+                <h3 class="chart-title">Spending by Category</h3>
+                {{ charts['pie']|safe }}
+            </div>
         </div>
     </div>
 
-    <a href="{{ url_for('upload_file') }}" class="btn btn-primary mt-3">
-        Upload New Statement
-    </a>
+    <!-- Second Row - Timeline Charts -->
+    <div class="row row-equal">
+        <div class="col-md-6">
+            <div class="chart-container">
+                <h3 class="chart-title">Daily Spending</h3>
+                {{ charts['timeline']|safe }}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="chart-container">
+                <h3 class="chart-title">Accumulated Spending</h3>
+                {{ charts['timeline_accumulated']|safe }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Third Row - Combined Chart -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-container">
+                <h3 class="chart-title">Daily vs. Accumulated Spending</h3>
+                {{ charts['timeline_combined']|safe }}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
