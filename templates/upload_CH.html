@@ -1,5 +1,9 @@
 {% extends "bootstrap/base.html" %}
 
+{% block navbar %}
+    {% include '_navbar.html' %}
+{% endblock %}
+
 {% block styles %}
 {{ super() }}
 <style>
@@ -47,15 +51,15 @@
         transition: all 0.3s ease;
     }
     .file-upload-input:hover {
-        border-color: #4CAF50;
+        border-color: #14919b;
         background: #f9f9f9;
     }
     .file-upload-input.has-file {
-        border-color: #4CAF50;
+        border-color: #14919b;
         background: #f0f8f0;
     }
     .upload-btn {
-        background: #4CAF50;
+        background: #0b6477;
         color: white;
         border: none;
         padding: 12px 30px;
@@ -65,14 +69,14 @@
         transition: all 0.3s ease;
     }
     .upload-btn:hover {
-        background: #3d8b40;
+        background: #14919b;
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
     }
     .file-name {
         margin-top: 15px;
         font-size: 14px;
-        color: #4CAF50;
+        color: #14919b;
         font-weight: 500;
     }
     .supported-formats {

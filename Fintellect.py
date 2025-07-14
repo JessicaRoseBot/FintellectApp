@@ -4,9 +4,11 @@ from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_bootstrap import Bootstrap
 import plotly.express as px
 from werkzeug.utils import secure_filename
+from flask import jsonify
 
 # Initialize Flask app
 app = Flask(__name__, template_folder='templates')
+bootstrap = Bootstrap(app)
 
 # Configuration
 app.config.update(
@@ -15,13 +17,6 @@ app.config.update(
     BOOTSTRAP_SERVE_LOCAL=True,
     ALLOWED_EXTENSIONS={'csv'} 
 )
-
-# Initialize extensions
-bootstrap = Bootstrap(app)
-
-@app.context_processor
-def inject_bootstrap():
-    return dict(bootstrap=bootstrap)
 
 # Ensure upload folder exists
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
@@ -123,7 +118,8 @@ def upload_file():
                 
                 df = process_statement(temp_path)
                 processed_path = os.path.join(app.config['UPLOAD_FOLDER'], 'processed.csv')
-                df.to_csv(processed_path, index=False)
+                hdr = False  if os.path.isfile(processed_path) else True
+                df.to_csv(processed_path, index=False, mode="a", header=hdr)
                 
                 flash('File processed successfully!', 'success')
                 return redirect(url_for('dashboard'))
@@ -253,6 +249,55 @@ def show_results():
     else:
         flash('No processed data found', 'error')
         return redirect(url_for('upload_file'))
+    
+@app.route('/edit', methods=['GET', 'POST'])
+def edit_transactions():
+    try:
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], 'processed.csv')
+        if not os.path.exists(filepath):
+            flash('No transactions found. Please upload a file first.', 'error')
+            return redirect(url_for('upload_file'))
+        
+        # Define standard categories (you can expand this)
+        categories = [
+            'Eating Out', 'Groceries', 'Amazon', 
+            'Entertainment', 'Transportation', 
+            'Utilities', 'Uncategorized'
+        ]
+        
+        if request.method == 'POST':
+            # Load existing data
+            df = pd.read_csv(filepath)
+            
+            # Process form updates
+            for i in range(len(df)):
+                amount_key = f'amount_{i}'
+                category_key = f'category_{i}'
+                
+                if amount_key in request.form:
+                    df.at[i, 'amount'] = float(request.form[amount_key])
+                if category_key in request.form:
+                    df.at[i, 'auto_category'] = request.form[category_key]
+            
+            # Save back to CSV
+            df.to_csv(filepath, index=False)
+            flash('All changes saved successfully!', 'success')
+            return redirect(url_for('edit_transactions'))
+        
+        # For GET requests
+        df = pd.read_csv(filepath)
+        transactions = df.to_dict('records')
+        
+        return render_template(
+            'edit.html',
+            transactions=transactions,
+            categories=categories
+        )
+    
+    except Exception as e:
+        flash(f'Error editing transactions: {str(e)}', 'error')
+        return redirect(url_for('dashboard'))
 
 if __name__ == '__main__':
-    app.run(debug=True,port=8000)
+    app.run(debug=True,port=5000
+)
