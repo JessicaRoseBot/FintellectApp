@@ -1,4 +1,4 @@
-{% extends "bootstrap/base.html" %}
+{% extends "base.html" %}
 
 {% block navbar %}
     {% include '_navbar.html' %}
@@ -99,20 +99,32 @@
 {% block scripts %}
 <script>
     // Add confirmation dialog before leaving unsaved changes
+    let formSubmitting = false;
     window.addEventListener('beforeunload', function(e) {
+        if (formSubmitting) return; // Don't warn if submitting
         const inputs = document.querySelectorAll('input, select');
         let changed = false;
-        
         inputs.forEach(input => {
             if (input.defaultValue !== input.value) {
                 changed = true;
             }
         });
-        
         if (changed) {
             e.preventDefault();
             e.returnValue = '';
         }
+    });
+
+    // Disable warning on form submit
+    document.querySelector('form').addEventListener('submit', function() {
+        formSubmitting = true;
+    });
+
+    // --- FIX: After reload, set defaultValue to current value ---
+    window.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('input, select').forEach(function(el) {
+            el.defaultValue = el.value;
+        });
     });
 </script>
 {% endblock %}

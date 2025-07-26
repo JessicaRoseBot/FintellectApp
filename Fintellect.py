@@ -129,7 +129,7 @@ def upload_file():
         else:
             flash('Only CSV files allowed', 'error')
     
-    return render_template('upload_CH.html')
+    return render_template('upload.html')
 
 @app.route('/dashboard')
 def dashboard():
@@ -234,7 +234,7 @@ def dashboard():
                 title='Daily and Cumulative Spending'
             ).to_html(full_html=False)
         
-        return render_template('dashboard_CH.html', charts=charts)
+        return render_template('dashboard.html', charts=charts)
         
     except Exception as e:
         flash(f'Dashboard error: {str(e)}', 'error')
@@ -245,7 +245,7 @@ def show_results():
     filepath = os.path.join(app.config['UPLOAD_FOLDER'], 'processed.csv')
     if os.path.exists(filepath):
         df = pd.read_csv(filepath)
-        return render_template('results_CH.html', tables=[df.to_html(classes='data')])
+        return render_template('results.html', tables=[df.to_html(classes='data')])
     else:
         flash('No processed data found', 'error')
         return redirect(url_for('upload_file'))

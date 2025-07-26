@@ -1,37 +1,102 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <!-- Brand and toggle get grouped for mobile -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{{ url_for('upload_file') }}">
+<nav class="web-navbar">
+    <div class="nav-container">
+        <!-- Brand on far left -->
+        <div class="nav-brand">
+            <a href="{{ url_for('upload_file') }}">
                 <i class="glyphicon glyphicon-piggy-bank"></i> Fintellect
             </a>
         </div>
-
-        <!-- Nav links -->
-        <div class="collapse navbar-collapse" id="bs-navbar">
-            <ul class="nav navbar-nav">
-                <li class="{{ 'active' if request.endpoint == 'upload_file' }}">
-                    <a href="{{ url_for('upload_file') }}">
-                        <i class="glyphicon glyphicon-upload"></i> Upload
-                    </a>
-                </li>
-                <li class="{{ 'active' if request.endpoint == 'edit_transactions' }}">
-                    <a href="{{ url_for('edit_transactions') }}">
-                        <i class="glyphicon glyphicon-edit"></i> Edit
-                    </a>
-                </li>
-                <li class="{{ 'active' if request.endpoint == 'dashboard' }}">
-                    <a href="{{ url_for('dashboard') }}">
-                        <i class="glyphicon glyphicon-stats"></i> Dashboard
-                    </a>
-                </li>
-            </ul>
+        
+        <!-- Horizontal menu -->
+        <div class="nav-menu">
+            <a href="{{ url_for('upload_file') }}" class="{{ 'active' if request.endpoint == 'upload_file' }}">
+                <i class="glyphicon glyphicon-upload"></i> Upload
+            </a>
+            <a href="{{ url_for('edit_transactions') }}" class="{{ 'active' if request.endpoint == 'edit_transactions' }}">
+                <i class="glyphicon glyphicon-edit"></i> Edit
+            </a>
+            <a href="{{ url_for('dashboard') }}" class="{{ 'active' if request.endpoint == 'dashboard' }}">
+                <i class="glyphicon glyphicon-stats"></i> Dashboard
+            </a>
         </div>
     </div>
 </nav>
+
+<style>
+    /* Reset any navbar styles */
+    .web-navbar, .web-navbar * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Navbar container */
+    .web-navbar {
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        height: 60px;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+    
+    .nav-container {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    
+    /* Brand styling */
+    .nav-brand {
+        margin-right: 40px;
+    }
+    
+    .nav-brand a {
+        color: #333;
+        font-size: 20px;
+        font-weight: bold;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+    }
+    
+    .nav-brand i {
+        margin-right: 8px;
+        font-size: 24px;
+    }
+    
+    /* Menu items */
+    .nav-menu {
+        display: flex;
+        height: 100%;
+    }
+    
+    .nav-menu a {
+        color: #555;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        height: 100%;
+        transition: all 0.3s ease;
+    }
+    
+    .nav-menu a:hover {
+        background-color: #f8f8f8;
+        color: #333;
+    }
+    
+    .nav-menu a.active {
+        background-color: #f0f0f0;
+        color: #222;
+        font-weight: bold;
+    }
+    
+    .nav-menu i {
+        margin-right: 8px;
+    }
+</style>
