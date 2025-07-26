@@ -1,203 +1,326 @@
-{% extends "base.html" %}
+{% extends "bootstrap/base.html" %}
 
-{% block navbar %}
-    {% include '_navbar.html' %}
-{% endblock %}
+{% block title %}Upload Statements | Fintellect{% endblock %}
 
 {% block styles %}
 {{ super() }}
 <style>
-    .upload-container {
-        max-width: 600px;
+    /* Navbar Styles */
+    .web-navbar {
+        background-color: #082E38;
+        box-shadow: 0 2px 4px #082E38;
+        height: 60px;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+    
+    .nav-container {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        max-width: 1200px;
         margin: 0 auto;
-        padding: 40px;
+        padding: 0 20px;
+    }
+    
+    .nav-brand {
+        margin-right: 40px;
+    }
+    
+    .nav-brand a {
+        color: #CAE5CF;
+        font-size: 20px;
+        font-weight: bold;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+    }
+    
+    .nav-brand i {
+        margin-right: 8px;
+        font-size: 24px;
+    }
+    
+    .nav-menu {
+        display: flex;
+        height: 100%;
+    }
+    
+    .nav-menu a {
+        color: #ffffff;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        height: 100%;
+        transition: all 0.3s ease;
+    }
+    
+    .nav-menu a:hover {
+        background-color: #CAE5CF;
+        color: #082E38;
+    }
+    
+    .nav-menu a.active {
+        background-color: #CAE5CF;
+        color: #082E38;
+        font-weight: bold;
+    }
+    
+    .nav-menu i {
+        margin-right: 8px;
+    }
+
+    /* Upload Container Styles */
+    .upload-container {
+        max-width: 800px;
+        margin: 100px auto 0;
+        padding: 30px;
     }
     .upload-card {
         background: white;
-        border-radius: 12px;
-        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         padding: 40px;
         text-align: center;
     }
-    .upload-icon {
-        font-size: 48px;
-        color: #4CAF50;
-        margin-bottom: 20px;
-    }
     .upload-title {
         color: #2c3e50;
-        font-weight: 600;
-        margin-bottom: 10px;
+        font-size: 28px;
+        margin-bottom: 15px;
     }
     .upload-subtitle {
         color: #7f8c8d;
         margin-bottom: 30px;
         font-size: 16px;
     }
-    .file-upload-wrapper {
-        position: relative;
+    .file-input-wrapper {
         margin-bottom: 30px;
     }
-    .file-upload-input {
-        width: 100%;
-        height: 180px;
+    .file-input-label {
+        display: block;
+        padding: 40px;
         border: 2px dashed #ddd;
         border-radius: 8px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-        transition: all 0.3s ease;
+        cursor: pointer;
+        transition: all 0.3s;
     }
-    .file-upload-input:hover {
-        border-color: #14919b;
-        background: #f9f9f9;
+    .file-input-label:hover {
+        border-color: #CAE5CF;
+        background: #f8fafc;
     }
-    .file-upload-input.has-file {
-        border-color: #14919b;
-        background: #f0f8f0;
+    .file-input-label.drag-over {
+        border-color: #CAE5CF;
+        background: #ebf5ff;
+    }
+    #fileInput {
+        display: none;
     }
     .upload-btn {
-        background: #0b6477;
-        color: white;
+        background: #CAE5CF;
+        color: 082E38;
         border: none;
         padding: 12px 30px;
-        border-radius: 30px;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-        transition: all 0.3s ease;
+        font-size: 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s;
     }
     .upload-btn:hover {
-        background: #14919b;
+        background: #CAE5CF;
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
     }
-    .file-name {
-        margin-top: 15px;
-        font-size: 14px;
-        color: #14919b;
-        font-weight: 500;
+    .upload-btn:disabled {
+        background: #95a5a6;
+        cursor: not-allowed;
+        transform: none;
     }
-    .supported-formats {
+    .file-list {
         margin-top: 20px;
-        font-size: 13px;
-        color: #95a5a6;
+        text-align: left;
     }
-    .flash-messages {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 1000;
-        min-width: 300px;
+    .file-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        background: #f8f9fa;
+        border-radius: 4px;
+        margin-bottom: 8px;
+    }
+    .file-item-name {
+        flex-grow: 1;
+    }
+    .file-item-size {
+        color: #7f8c8d;
+        margin-left: 15px;
+    }
+    .file-item-remove {
+        color: #e74c3c;
+        margin-left: 15px;
+        cursor: pointer;
     }
 </style>
 {% endblock %}
 
-{% block content %}
-<div class="flash-messages">
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-                <div class="alert alert-{{ category }} alert-dismissible fade show">
-                    {{ message }}
-                    <button type="button" class="close" data-dismiss="alert">
-                        <span>&times;</span>
-                    </button>
-                </div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-</div>
+{% block navbar %}
+<nav class="web-navbar">
+    <div class="nav-container">
+        <!-- Brand on far left -->
+        <div class="nav-brand">
+            <a href="{{ url_for('upload_file') }}">
+                <i class="glyphicon glyphicon-piggy-bank"></i> Fintellect
+            </a>
+        </div>
+        
+        <!-- Horizontal menu -->
+        <div class="nav-menu">
+            <a href="{{ url_for('upload_file') }}" class="{{ 'active' if request.endpoint == 'upload_file' }}">
+                <i class="glyphicon glyphicon-upload"></i> Upload
+            </a>
+            <a href="{{ url_for('edit_transactions') }}" class="{{ 'active' if request.endpoint == 'edit_transactions' }}">
+                <i class="glyphicon glyphicon-edit"></i> Edit
+            </a>
+            <a href="{{ url_for('dashboard') }}" class="{{ 'active' if request.endpoint == 'dashboard' }}">
+                <i class="glyphicon glyphicon-stats"></i> Dashboard
+            </a>
+        </div>
+    </div>
+</nav>
+{% endblock %}
 
+{% block content %}
 <div class="upload-container">
     <div class="upload-card">
-        <div class="upload-icon">
-            <i class="fas fa-file-upload"></i>
-        </div>
-        <h2 class="upload-title">Upload Your Statement</h2>
-        <p class="upload-subtitle">Get insights into your spending habits by uploading your bank statement</p>
+        <h1 class="upload-title">Upload Bank Statements</h1>
+        <p class="upload-subtitle">Upload one or multiple CSV files to analyze your spending</p>
         
         <form method="POST" enctype="multipart/form-data" id="uploadForm">
-            <div class="file-upload-wrapper">
-                <label for="fileInput" class="file-upload-input" id="dropArea">
-                    <i class="fas fa-cloud-upload-alt" style="font-size: 36px; margin-bottom: 10px; color: #95a5a6;"></i>
-                    <span>Drag & drop your file here</span>
-                    <span class="supported-formats">or click to browse (CSV only)</span>
-                    <span class="file-name" id="fileName"></span>
+            <div class="file-input-wrapper">
+                <label for="fileInput" class="file-input-label" id="dropZone">
+                    <i class="glyphicon glyphicon-cloud-upload" style="font-size: 48px; color: #3FA7C3; margin-bottom: 15px;"></i>
+                    <h3>Drag & Drop Files Here</h3>
+                    <p>or click to select files</p>
+                    <input type="file" id="fileInput" name="file" accept=".csv" multiple style="display: none;">
                 </label>
-                <input type="file" id="fileInput" name="file" accept=".csv" style="display: none;">
+                
+                <div class="file-list" id="fileList">
+                    <!-- Files will appear here -->
+                </div>
             </div>
             
-            <button type="submit" class="upload-btn" id="submitBtn" disabled>
-                <i class="fas fa-chart-line"></i> Analyze Statement
+            <button type="submit" class="upload-btn" id="uploadBtn" disabled>
+                <i class="glyphicon glyphicon-upload"></i> Upload Files
             </button>
         </form>
     </div>
 </div>
+{% endblock %}
 
 {% block scripts %}
 {{ super() }}
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 <script>
-    // File input handling
-    const fileInput = document.getElementById('fileInput');
-    const dropArea = document.getElementById('dropArea');
-    const fileName = document.getElementById('fileName');
-    const submitBtn = document.getElementById('submitBtn');
-    
-    // Click handler
-    dropArea.addEventListener('click', () => fileInput.click());
-    
-    // File selection handler
-    fileInput.addEventListener('change', (e) => {
-        if (fileInput.files.length) {
-            fileName.textContent = fileInput.files[0].name;
-            dropArea.classList.add('has-file');
-            submitBtn.disabled = false;
-        }
-    });
-    
-    // Drag and drop handlers
-    ['dragenter', 'dragover'].forEach(eventName => {
-        dropArea.addEventListener(eventName, highlight, false);
-    });
-    
-    ['dragleave', 'drop'].forEach(eventName => {
-        dropArea.addEventListener(eventName, unhighlight, false);
-    });
-    
-    function highlight(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        dropArea.classList.add('highlight');
-    }
-    
-    function unhighlight(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        dropArea.classList.remove('highlight');
+    document.addEventListener('DOMContentLoaded', function() {
+        const fileInput = document.getElementById('fileInput');
+        const dropZone = document.getElementById('dropZone');
+        const fileList = document.getElementById('fileList');
+        const uploadBtn = document.getElementById('uploadBtn');
+        const files = [];
         
-        if (e.type === 'drop') {
-            fileInput.files = e.dataTransfer.files;
-            if (fileInput.files.length) {
-                fileName.textContent = fileInput.files[0].name;
-                dropArea.classList.add('has-file');
-                submitBtn.disabled = false;
+        // Handle drag and drop
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, preventDefaults, false);
+        });
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, highlight, false);
+        });
+        
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, unhighlight, false);
+        });
+        
+        function highlight() {
+            dropZone.classList.add('drag-over');
+        }
+        
+        function unhighlight() {
+            dropZone.classList.remove('drag-over');
+        }
+        
+        // Handle file selection
+        dropZone.addEventListener('drop', handleDrop, false);
+        fileInput.addEventListener('change', handleFiles, false);
+        
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            fileInput.files = dt.files;
+            handleFiles();
+        }
+        
+        function handleFiles() {
+            files.length = 0; // Clear existing files
+            fileList.innerHTML = '';
+            
+            if (fileInput.files.length > 0) {
+                Array.from(fileInput.files).forEach(file => {
+                    files.push(file);
+                    renderFileItem(file);
+                });
+                uploadBtn.disabled = false;
+            } else {
+                uploadBtn.disabled = true;
             }
         }
-    }
-    
-    // Prevent default drag behaviors
-    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-        dropArea.addEventListener(eventName, preventDefaults, false);
-        document.body.addEventListener(eventName, preventDefaults, false);
+        
+        function renderFileItem(file) {
+            const fileItem = document.createElement('div');
+            fileItem.className = 'file-item';
+            
+            const fileName = document.createElement('span');
+            fileName.className = 'file-item-name';
+            fileName.textContent = file.name;
+            
+            const fileSize = document.createElement('span');
+            fileSize.className = 'file-item-size';
+            fileSize.textContent = formatFileSize(file.size);
+            
+            const fileRemove = document.createElement('span');
+            fileRemove.className = 'file-item-remove';
+            fileRemove.innerHTML = '&times;';
+            fileRemove.addEventListener('click', () => removeFile(file.name));
+            
+            fileItem.appendChild(fileName);
+            fileItem.appendChild(fileSize);
+            fileItem.appendChild(fileRemove);
+            
+            fileList.appendChild(fileItem);
+        }
+        
+        function removeFile(filename) {
+            const updatedFiles = Array.from(fileInput.files).filter(f => f.name !== filename);
+            
+            // Create new DataTransfer to update files
+            const dataTransfer = new DataTransfer();
+            updatedFiles.forEach(file => dataTransfer.items.add(file));
+            fileInput.files = dataTransfer.files;
+            
+            handleFiles(); // Refresh the list
+        }
+        
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];  // Fixed parseFloat error
+        }
     });
-    
-    function preventDefaults(e) {
-        e.preventDefault();
-        e.stopPropagation();
-    }
 </script>
-{% endblock %}
 {% endblock %}

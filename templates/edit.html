@@ -14,9 +14,15 @@
         margin-bottom: 40px;
     }
     .edit-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         border-bottom: 1px solid #eee;
         padding-bottom: 20px;
         margin-bottom: 30px;
+    }
+    .header-text {
+        flex-grow: 1;
     }
     .table-editable {
         margin-top: 20px;
@@ -33,24 +39,38 @@
     }
     .save-btn {
         background: #4CAF50;
+        color: white;
         padding: 10px 25px;
         font-weight: 600;
-        margin-top: 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
     }
-    .action-btns {
-        margin-bottom: 20px;
+    .save-btn i {
+        margin-right: 8px;
+    }
+    .save-btn:hover {
+        background: #3e8e41;
     }
 </style>
 {% endblock %}
 
 {% block content %}
 <div class="edit-container">
-    <div class="edit-header">
-        <h2><i class="fas fa-edit mr-2"></i>Edit Transactions</h2>
-        <p class="text-muted">Modify amounts or categories below. Changes won't be saved until you click "Save All".</p>
-    </div>
-
     <form method="POST" action="{{ url_for('edit_transactions') }}">
+        <div class="edit-header">
+            <div class="header-text">
+                <h2 style="margin: 0;"><i class="fas fa-edit mr-2"></i>Edit Transactions</h2>
+                <p class="text-muted" style="margin: 5px 0 0 0;">Modify amounts or categories below. Changes won't be saved until you click "Save All".</p>
+            </div>
+            <button type="submit" class="save-btn">
+                <i class="fas fa-save"></i> Save All Changes
+            </button>
+        </div>
+
         <div class="table-responsive">
             <table class="table table-striped table-hover table-editable">
                 <thead class="thead-light">
@@ -86,12 +106,6 @@
                 </tbody>
             </table>
         </div>
-        
-        <div class="text-right">
-            <button type="submit" class="btn save-btn">
-                <i class="fas fa-save mr-2"></i>Save All Changes
-            </button>
-        </div>
     </form>
 </div>
 {% endblock %}
@@ -120,7 +134,7 @@
         formSubmitting = true;
     });
 
-    // --- FIX: After reload, set defaultValue to current value ---
+    // Set default values on load
     window.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('input, select').forEach(function(el) {
             el.defaultValue = el.value;

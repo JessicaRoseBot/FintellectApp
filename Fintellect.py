@@ -101,33 +101,35 @@ def process_statement(file_stream):
 def upload_file():
     if request.method == 'POST':
         if 'file' not in request.files:
-            flash('No file selected', 'error')
+            flash('No files selected', 'error')
             return redirect(request.url)
             
-        file = request.files['file']
-        
-        if file.filename == '':
-            flash('No file selected', 'error')
+        files = request.files.getlist('file')
+        if not files or all(f.filename == '' for f in files):
+            flash('No files selected', 'error')
             return redirect(request.url)
             
-        if file and allowed_file(file.filename):
-            try:
-                filename = secure_filename(file.filename)
-                temp_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-                file.save(temp_path)
-                
-                df = process_statement(temp_path)
+        try:
+            all_dfs = []
+            for file in files:
+                if file and allowed_file(file.filename):
+                    filename = secure_filename(file.filename)
+                    temp_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                    file.save(temp_path)
+                    df = process_statement(temp_path)
+                    all_dfs.append(df)
+            
+            if all_dfs:
+                combined_df = pd.concat(all_dfs)
                 processed_path = os.path.join(app.config['UPLOAD_FOLDER'], 'processed.csv')
-                hdr = False  if os.path.isfile(processed_path) else True
-                df.to_csv(processed_path, index=False, mode="a", header=hdr)
-                
-                flash('File processed successfully!', 'success')
+                combined_df.to_csv(processed_path, index=False)
+                flash(f'{len(all_dfs)} files processed successfully!', 'success')
                 return redirect(url_for('dashboard'))
+            else:
+                flash('No valid CSV files were uploaded', 'error')
                 
-            except Exception as e:
-                flash(f'Error processing file: {str(e)}', 'error')
-        else:
-            flash('Only CSV files allowed', 'error')
+        except Exception as e:
+            flash(f'Error processing files: {str(e)}', 'error')
     
     return render_template('upload.html')
 
@@ -167,30 +169,6 @@ def dashboard():
             title='Spending by Category (Percentage of Total)'
         ).update_traces(textinfo='percent+label').to_html(full_html=False)
         
-        # 2. Expense Pie Chart
-        # if 'transaction_type' in df.columns:
-            # df_expense = df[df['transaction_type'] == 'Expense'].copy()
-            # df_expense['amount'] = df_expense['amount'].abs()
-            # pie_data_expense = df_expense.groupby('auto_category', as_index=False)['amount'].sum()
-            
-            # charts['pie_exp'] = px.pie(
-               # pie_data_expense,
-               # values='amount',
-               # names='auto_category',
-               # title='Expenses by Category (Percentage of Total)'
-            # ).update_traces(textinfo='percent+label').to_html(full_html=False)
-            
-            # 3. Income Pie Chart - TBD
-            # df_income = df[df['transaction_type'] == 'Income'].copy()
-            # df_income['amount'] = df_income['amount'].abs()
-            # pie_data_income = df_income.groupby('auto_category', as_index=False)['amount'].sum()
-            
-            #charts['pie_inc'] = px.pie(
-               # pie_data_income,
-               # values='amount',
-               # names='auto_category',
-               # title='Income by Category (Percentage of Total)'
-            # ).update_traces(textinfo='percent+label').to_html(full_html=False)
         
         # 4. Time Series Charts
         if 'date' in df.columns:
@@ -258,11 +236,12 @@ def edit_transactions():
             flash('No transactions found. Please upload a file first.', 'error')
             return redirect(url_for('upload_file'))
         
-        # Define standard categories (you can expand this)
+        # Define standard categories
         categories = [
-            'Eating Out', 'Groceries', 'Amazon', 
-            'Entertainment', 'Transportation', 
-            'Utilities', 'Uncategorized'
+            'Eating Out', 'Groceries', 'Shopping', 
+            'Entertainment', 'Travel', 
+            'Utilities', 'Health',
+            'Cat', 'Dance'
         ]
         
         if request.method == 'POST':
