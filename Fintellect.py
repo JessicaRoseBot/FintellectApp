@@ -99,6 +99,7 @@ def process_statement(file_stream):
 # ======================
 
 # Upload file function, allow user search PC for CSV files
+# TODO: Will need to revise the upload to append the new CSV data to the processed.csv
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
@@ -287,18 +288,8 @@ def dashboard():
     except Exception as e:
         flash(f'Dashboard error: {str(e)}', 'error')
         return redirect(url_for('upload_file'))
-    
-# Edit page where user can revise budget categories
-@app.route('/results')
-def show_results():
-    filepath = os.path.join(app.config['UPLOAD_FOLDER'], 'processed.csv')
-    if os.path.exists(filepath):
-        df = pd.read_csv(filepath)
-        return render_template('results.html', tables=[df.to_html(classes='data')])
-    else:
-        flash('No processed data found', 'error')
-        return redirect(url_for('upload_file'))
-    
+
+# Edit page where user can revise budget categories    
 @app.route('/edit', methods=['GET', 'POST'])
 def edit_transactions():
     try:
