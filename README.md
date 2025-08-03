@@ -41,6 +41,8 @@ python app.py
 ```
 The application will start at http://localhost:8000
 
+![upload and dashboard gif](https://github.com/JessicaRoseBot/FintellectApp/blob/main/UploadandDashboard.gif)
+
 ### 2. Upload Your Data
 
 - Click "Choose File" and select your CSV
@@ -74,6 +76,8 @@ After successful upload, you'll be automatically redirected to the dashboard wit
 1. Prepare a CSV file with your financial data
 
 2. Upload the file through the web interface
+
+![edit gif](https://github.com/JessicaRoseBot/FintellectApp/blob/main/Edit.gif)
 
 3. Review your uploaded expenses and edit the categories as necessary
 
