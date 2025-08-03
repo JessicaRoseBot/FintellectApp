@@ -1,5 +1,41 @@
 # Fintellect User Guide
-Fintellect is a data-driven personal finance dashboard that transforms raw bank statements into visualized 
+Fintellect is a data-driven personal finance dashboard that transforms raw bank statements into visualized financial insights. This Flask-powered web application automatically categorizes transactions, tracks spending patterns, and presents your financial data through interactive charts and graphs - helping you understand where your money goes and how to optimize your spending.
+
+### Key Features:
+
+- Automated Categorization: Intelligently classifies transactions into spending categories
+
+- Interactive Visualizations:
+
+   - Pie charts showing spending distribution
+
+   - Time-series graphs of daily and accumulated expenses
+
+   - Combined views for trend analysis
+
+- CSV Integration: Works with exported bank statement CSVs
+
+- Responsive Design: Accessible on both desktop and mobile devices
+
+### Perfect for:
+
+- Individuals wanting better visibility into their spending habits
+
+- Budget-conscious users tracking expenses over time
+
+- Financial beginners looking for an intuitive money management tool
+
+### Built with:
+
+- Python/Flask backend
+
+- Plotly for visualizations
+
+- Pandas for data processing
+
+- Bootstrap for responsive UI
+
+-----
 
 ## 📌 Prerequisites
 
