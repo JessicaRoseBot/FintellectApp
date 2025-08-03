@@ -4,7 +4,7 @@ date,description,amount,auto_category,bank_category,transaction_type,needs_revie
 2025-02-25,TRADER JOE S #303,-92.42,Groceries,Groceries,Expense,False
 2025-02-23,MICRO CENTER #181 RETAIL,-56.75,Shopping,Shopping,Expense,False
 2025-02-22,Spotify USA,-5.99,Eating Out,Bills & Utilities,Expense,False
-2025-02-22,SP LIQUID I.V.,-69.96,Groceries,Groceries,Expense,False
+2025-02-22,SP LIQUID I.V.,-69.96,Entertainment,Groceries,Expense,False
 2025-02-21,AMAZON MKTPL*BC6FT8EH3,-9.88,Eating Out,Shopping,Expense,True
 2025-02-22,KRISERS BELLEVIEW,-36.11,Shopping,Shopping,Expense,False
 2025-02-22,PAYPAL *ULTASALONCO,-34.12,Shopping,Shopping,Expense,False
@@ -16,7 +16,7 @@ date,description,amount,auto_category,bank_category,transaction_type,needs_revie
 2025-02-18,BLINK CHARGING CO,-6.86,Eating Out,Automotive,Expense,False
 2025-02-16,DENVER ZOO STORE,-15.0,Shopping,Shopping,Expense,False
 2025-02-16,TRADER JOE S #300,-27.01,Groceries,Groceries,Expense,False
-2025-02-16,TST*SPICE ROOM - COLFAX,-25.0,Eating Out,Food & Drink,Expense,False
+2025-02-16,TST*SPICE ROOM - COLFAX,-25.0,Travel,Food & Drink,Expense,False
 2025-02-16,EINSTEIN BROS BAGELS3623,-16.48,Eating Out,Food & Drink,Expense,False
 2025-02-15,AMAZON MKTPL*2U5932AI3,-17.39,Eating Out,Shopping,Expense,True
 2025-02-10,Stampede,-200.0,Eating Out,Food & Drink,Expense,False
@@ -26,13 +26,13 @@ date,description,amount,auto_category,bank_category,transaction_type,needs_revie
 2025-02-10,TARGET.COM  *,-38.53,Shopping,Shopping,Expense,False
 2025-02-09,TACO BELL 033864,-5.0,Eating Out,Food & Drink,Expense,False
 2025-02-10,VZWRLSS*MY VZ VW P,-180.44,Eating Out,Bills & Utilities,Expense,False
-2025-02-10,MINT MOBILE,-201.67,Eating Out,Bills & Utilities,Expense,False
+2025-02-10,MINT MOBILE,-201.67,Travel,Bills & Utilities,Expense,False
 2025-02-10,A2WEBHOST* INV4661126,-19.99,Eating Out,Professional Services,Expense,False
 2025-02-07,PAYPAL *MACCOSMETIC,-19.03,Shopping,Shopping,Expense,False
-2025-02-05,LASTPASS.COM,-36.0,Shopping,Shopping,Expense,False
-2025-02-04,Amazon.com*Z71RB9GT0,-15.82,Eating Out,Shopping,Expense,True
+2025-02-05,LASTPASS.COM,-36.0,Cat,Shopping,Expense,False
+2025-02-04,Amazon.com*Z71RB9GT0,-15.82,Cat,Shopping,Expense,True
 2025-02-03,WASH LAUNDRY MOBILE,-40.0,Eating Out,Personal,Expense,False
 2025-02-04,PAYPAL *MACCOSMETIC,-38.39,Shopping,Shopping,Expense,False
 2025-02-02,BATH &amp; BODY WORKS 3083,-5.04,Shopping,Shopping,Expense,False
-2025-02-02,452 Lush Park Meadows,-5.89,Shopping,Shopping,Expense,False
-2025-02-03,MRS FIELDS COOKIES,-3.41,Eating Out,Food & Drink,Expense,False
+2025-02-02,452 Lush Park Meadows,-5.89,Utilities,Shopping,Expense,False
+2025-02-03,MRS FIELDS COOKIES,-3.41,Entertainment,Food & Drink,Expense,False
