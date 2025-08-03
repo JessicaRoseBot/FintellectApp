@@ -16,7 +16,21 @@ Fintellect is a Flask-based web application that processes financial transaction
 | Responsive Design | ✅ | `templates/dashboard.html` |
 
 ## User Flow
-### 
+#### Step One: Upload CSV
+- User can click to open file explorer or drag and drop
+<img src="https://github.com/JessicaRoseBot/FintellectApp/blob/main/UserFlow/UserFlow_One.png" width="50%" alt="Step One">
+<img src="https://github.com/JessicaRoseBot/FintellectApp/blob/main/UserFlow/UserFlow_Two.png" width="50%" alt="Step Two">
+
+- User can review uploaded CSVs before continuing with upload
+<img src="https://github.com/JessicaRoseBot/FintellectApp/blob/main/UserFlow/UserFlow_Three.png" width="50%" alt="Step Three">
+
+#### Step Two: Review Dashboard
+- Hitting upload will immediately redirect user to the Dashboard page
+<img src="https://github.com/JessicaRoseBot/FintellectApp/blob/main/UserFlow/UserFlow_Five.png" width="50%" alt="Step Five">
+
+#### (Optional) Step Three: Edit $ Amount or Categories
+- User can visit the Edit page to change CSV details
+<img src="https://github.com/JessicaRoseBot/FintellectApp/blob/main/UserFlow/UserFlow_Four.png" width="50%" alt="Step Four">
 
 ## Installation & Deployment
 ### Additional Developer Setup
@@ -119,3 +133,4 @@ templates/
 
 **Solution Needed**: 
 - Investigate where the root cause is and ensure the code is simplfied and the CSS is not duplicated / unique to any .html page
+
