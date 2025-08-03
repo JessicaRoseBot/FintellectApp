@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block styles %}
+
+<!-- Edit page capabilities and styles -->
+
 <style>
     .edit-container {
         background: white;
@@ -58,6 +61,7 @@
 </style>
 {% endblock %}
 
+<!-- Edit transactions interactive functions -->
 {% block content %}
 <div class="edit-container">
     <form method="POST" action="{{ url_for('edit_transactions') }}">

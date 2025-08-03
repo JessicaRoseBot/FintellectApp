@@ -1,152 +1,69 @@
-date,description,amount,auto_category,bank_category,transaction_type,needs_review,id
-2025-01-31,WHOLEFDS TMC 10207,-27.18,Groceries,Groceries,Expense,False,0
-2025-01-31,SQ *CORVUS COFFEE ROASTER,-12.08,Eating Out,Food & Drink,Expense,False,1
-2025-01-30,PUDGE BROS PIZZA - DTC,-37.0,Eating Out,Food & Drink,Expense,False,2
-2025-01-30,TARGET.COM  *,-38.26,Shopping,Shopping,Expense,False,3
-2025-01-29,AMAZON MKTPL*ZC1KD3O91,-46.12,Shopping,Shopping,Expense,True,4
-2025-01-27,Stampede,-10.0,Dance,Food & Drink,Expense,False,5
-2025-01-26,TRADER JOE S #303,-107.56,Groceries,Groceries,Expense,False,6
-2025-01-26,TST*URBAN EGG - BELLEVIE,-43.0,Eating Out,Food & Drink,Expense,False,7
-2025-01-28,AMAZON MKTPL*Z77U43EC2,-28.65,Shopping,Shopping,Expense,True,8
-2025-01-27,AMAZON MKTPL*ZC3N47T80,-55.73,Shopping,Shopping,Expense,True,9
-2025-01-27,FREETAXUSA.COM,-14.99,Utilities,Professional Services,Expense,False,10
-2025-01-23,CHEWY.COM,-76.67,Cat,Shopping,Expense,False,11
-2025-01-23,Amazon.com*ZG2MH4421,-13.04,Shopping,Shopping,Expense,True,12
-2025-01-22,Amazon.com*Z54UE6RF1,-80.9,Shopping,Shopping,Expense,True,13
-2025-01-22,Spotify USA,-5.99,Utilities,Bills & Utilities,Expense,False,14
-2025-01-20,SJC PEETS B TMP 6631309,-4.36,Eating Out,Food & Drink,Expense,False,15
-2025-01-20,IN-N-OUT SEASIDE,-12.84,Eating Out,Food & Drink,Expense,False,16
-2025-01-18,PAYPAL *STARBUCKS,-20.0,Eating Out,Food & Drink,Expense,False,17
-2025-01-17,TRADER JOE S #204,-49.21,Groceries,Groceries,Expense,False,18
-2025-01-17,PANDA EXPRESS #3222,-11.58,Eating Out,Food & Drink,Expense,False,19
-2025-01-16,EINSTEIN'S C CONCOURSE,-5.5,Eating Out,Food & Drink,Expense,False,20
-2025-01-15,AMAZON MKTPLACE PMTS,22.83,Shopping,Shopping,Income,True,21
-2025-01-15,AMAZON MKTPLACE PMTS,13.05,Shopping,Shopping,Income,True,22
-2025-01-15,DISCOUNT-TIRE-CO COD-13,-16.16,Eating Out,Automotive,Expense,False,23
-2025-01-14,TRADER JOE S #303,-49.24,Groceries,Groceries,Expense,False,24
-2025-01-15,AMAZON MKTPLACE PMTS,23.93,Shopping,Shopping,Income,True,25
-2025-01-15,AMAZON MKTPLACE PMTS,38.28,Shopping,Shopping,Income,True,26
-2025-01-14,CTLP*ADVENTURE PRODUCT,-3.0,Eating Out,Food & Drink,Expense,False,27
-2025-01-13,Stampede,-10.0,Dance,Food & Drink,Expense,False,28
-2025-01-13,WASH LAUNDRY MOBILE,-15.0,Utilities,Personal,Expense,False,29
-2025-01-13,TST*ALOY THAI EATERY - C,-23.76,Eating Out,Food & Drink,Expense,False,30
-2025-01-14,ACE HARDWARE,-11.2,Shopping,Home,Expense,False,31
-2025-01-13,TARGET.COM  *,-22.1,Shopping,Shopping,Expense,False,32
-2025-01-13,TARGET.COM  *,-16.36,Shopping,Shopping,Expense,False,33
-2025-01-13,TARGET.COM  *,-9.49,Shopping,Shopping,Expense,False,34
-2025-01-11,CATRINAS MEXICAN GRILL,-8.0,Eating Out,Food & Drink,Expense,False,35
-2025-01-11,SQ *THE TABLETOP TAP,-26.0,Eating Out,Food & Drink,Expense,False,36
-2025-01-10,DOLLAR TREE,-6.82,Entertainment,Shopping,Expense,False,37
-2025-01-09,TARGET.COM  *,-80.78,Entertainment,Shopping,Expense,False,38
-2025-01-09,TARGET.COM  *,-5.0,Entertainment,Shopping,Expense,False,39
-2025-01-08,TARGET        00028209,-28.4,Entertainment,Shopping,Expense,False,40
-2025-01-08,NATIONAL WESTERN STOCK SH,-174.0,Entertainment,Entertainment,Expense,False,41
-2025-01-06,Stampede,-10.0,Dance,Food & Drink,Expense,False,42
-2025-01-06,PAYPAL *AMC THEATRE,-4.38,Entertainment,Entertainment,Expense,False,43
-2025-01-03,AMAZON MKTPL*ZD7648AO2,-27.56,Shopping,Shopping,Expense,True,44
-2025-01-01,KING SOOPERS #0100,-120.91,Groceries,Groceries,Expense,False,45
-2025-04-29,TRADER JOE S #303,-48.34,Groceries,Groceries,Expense,False,46
-2025-04-29,TARGET.COM,-8.67,Shopping,Shopping,Expense,False,47
-2025-04-28,AMAZON MKTPLACE PMTS,21.49,Eating Out,Shopping,Income,True,48
-2025-04-28,SP LIQUID I.V.,-69.96,Health,Groceries,Expense,False,49
-2025-04-29,TARGET.COM  *,-38.17,Shopping,Shopping,Expense,False,50
-2025-04-26,SEPHORA PARK MEADOWS,-53.85,Shopping,Shopping,Expense,False,51
-2025-04-27,DOLLAR TREE,-2.69,Shopping,Shopping,Expense,False,52
-2025-04-27,AMAZON MKTPL*NB48D2ZO2,-14.68,Shopping,Shopping,Expense,True,53
-2025-04-27,MAC Park Meadows,-18.83,Shopping,Shopping,Expense,False,54
-2025-04-24,SOUTHWES    5262337696089,-4.0,Travel,Travel,Expense,False,55
-2025-04-23,BENEDICT'S RESTAURANT CO,-30.0,Eating Out,Food & Drink,Expense,False,56
-2025-04-23,CIRCLE K # 44099,-6.08,Eating Out,Gas,Expense,False,57
-2025-04-23,STEAMGAMES.COM 4259522985,-49.99,Entertainment,Entertainment,Expense,False,58
-2025-04-23,AMAZON MKTPLACE PMTS,21.81,Shopping,Shopping,Income,True,59
-2025-04-22,AMAZON MKTPLACE PMTS,43.65,Shopping,Shopping,Income,True,60
-2025-04-22,AMAZON MKTPLACE PMTS,25.98,Shopping,Shopping,Income,True,61
-2025-04-23,AMAZON MKTPLACE PMTS,29.46,Shopping,Shopping,Income,True,62
-2025-04-22,DEN PUBLIC PARKING,-32.0,Travel,Travel,Expense,False,63
-2025-04-22,CHIPOTLE 0007,-23.38,Eating Out,Food & Drink,Expense,False,64
-2025-04-22,Spotify USA,-5.99,Utilities,Bills & Utilities,Expense,False,65
-2025-04-18,QFC #5808,-30.69,Groceries,Groceries,Expense,False,66
-2025-04-18,QFC #5808,-28.9,Groceries,Groceries,Expense,False,67
-2025-04-18,GEICO  *AUTO,-331.83,Utilities,Bills & Utilities,Expense,False,68
-2025-04-18,EINSTEIN KIOSK - DEN,-6.04,Travel,Food & Drink,Expense,False,69
-2025-04-18,SQ *CAFE AN?CLAIR,-5.0,Eating Out,Food & Drink,Expense,False,70
-2025-04-18,TST*ITADAKI BELLEVUE,-24.0,Eating Out,Food & Drink,Expense,False,71
-2025-04-18,IKON PASS,-229.0,Entertainment,Entertainment,Expense,False,72
-2025-04-18,Denver Zoo,-104.0,Entertainment,Gifts & Donations,Expense,False,73
-2025-04-17,CHIPOTLE 0007,-12.85,Eating Out,Food & Drink,Expense,False,74
-2025-04-17,Amazon.com*322QT8FY3,-17.39,Entertainment,Shopping,Expense,True,75
-2025-04-16,MANITOU PARKING SEC A,-6.0,Entertainment,Travel,Expense,False,76
-2025-04-15,RMNP BEAVER MEADOWS VISIT,-7.0,Eating Out,Shopping,Expense,False,77
-2025-04-15,ESTES PARK MOUNTAIN SHOP,-18.65,Eating Out,Shopping,Expense,False,78
-2025-04-17,TARGET.COM  *,0.29,Eating Out,Shopping,Income,False,79
-2025-04-15,TRENDZ RETAIL,-20.64,Eating Out,Shopping,Expense,False,80
-2025-04-16,EINSTEIN BROS BAGELS2646,-8.12,Eating Out,Food & Drink,Expense,False,81
-2025-04-16,MANITOU BREWING COMPAN,-30.0,Eating Out,Food & Drink,Expense,False,82
-2025-04-15,BUC-EE'S #60,-88.8,Shopping,Groceries,Expense,False,83
-2025-04-15,SQ *WILD SPIRITS  LTD.,-41.31,Shopping,Shopping,Expense,False,84
-2025-04-15,FBF ESTES PARK,-6.49,Eating Out,Shopping,Expense,False,85
-2025-04-15,DOLLARTREE,-5.44,Eating Out,Shopping,Expense,False,86
-2025-04-15,AMAZON MKTPL*9N5ED4FG3,-65.75,Shopping,Shopping,Expense,True,87
-2025-04-14,AMAZON MKTPL*8U6QY12V3,-15.0,Shopping,Shopping,Expense,True,88
-2025-04-14,TST* ALOY MODERN THAI - D,-120.0,Eating Out,Food & Drink,Expense,False,89
-2025-04-14,AMAZON MKTPL*PW7557083,-25.89,Cat,Shopping,Expense,True,90
-2025-04-10,AMAZON MKTPL*2R5501S83,-29.75,Dance,Shopping,Expense,True,91
-2025-04-09,AMAZON MKTPL*6N1N20ZF3,-26.27,Entertainment,Shopping,Expense,True,92
-2025-04-08,Audible*GF0Y08RS3,-0.99,Eating Out,Bills & Utilities,Expense,False,93
-2025-04-07,TARGET        00028209,-2.89,Eating Out,Shopping,Expense,False,94
-2025-04-07,Amazon.com*MV8N057B3,-28.13,Entertainment,Shopping,Expense,True,95
-2025-04-07,TARGET.COM  *,-36.02,Shopping,Shopping,Expense,False,96
-2025-04-07,AMAZON MKTPL*KA1LG3R23,-143.94,Health,Shopping,Expense,True,97
-2025-04-06,SALLY BEAUTY #0802,-25.92,Shopping,Shopping,Expense,False,98
-2025-04-06,TRADER JOE S #303,-86.91,Groceries,Groceries,Expense,False,99
-2025-04-07,PAYPAL *CHEWY INC,-22.73,Eating Out,Shopping,Expense,False,100
-2025-04-07,AGODA.COM FIELD STAT,-257.66,Eating Out,Travel,Expense,False,101
-2025-04-06,PAYPAL *CHEWY INC,-151.67,Eating Out,Shopping,Expense,False,102
-2025-04-07,TARGET.COM  *,-6.73,Eating Out,Shopping,Expense,False,103
-2025-04-03,MICRO CENTER #181 RETAIL,-65.48,Eating Out,Shopping,Expense,False,104
-2025-04-05,TARGET.COM,-31.58,Eating Out,Shopping,Expense,False,105
-2025-04-02,FINN MCCOOLS BAR  GRILL,-20.0,Eating Out,Food & Drink,Expense,False,106
-2025-04-01,PUBLIC WORKS-PRKG METR,-1.0,Eating Out,Travel,Expense,False,107
-2025-04-01,TST*QUINCE COFFEE,-12.28,Eating Out,Food & Drink,Expense,False,108
-2025-04-01,PUBLIC WORKS-PRKG METR,-1.0,Eating Out,Travel,Expense,False,109
-2025-04-01,SHELL OIL 57443811203,-30.09,Eating Out,Gas,Expense,False,110
-2025-04-01,TST*CITYO MAKEBELIEVE,-16.0,Eating Out,Food & Drink,Expense,False,111
-2025-04-01,TST*VOODOO DOUGHNUT - DE,-2.46,Eating Out,Food & Drink,Expense,False,112
-2025-04-01,SP MINDS EYE CRYSTALS,-6.07,Eating Out,Shopping,Expense,False,113
-2025-02-28,TARGET        00028209,-58.64,Eating Out,Shopping,Expense,False,114
-2025-02-26,Amazon.com*OD8CZ5TC3,-26.5,Entertainment,Shopping,Expense,True,115
-2025-02-25,TRADER JOE S #303,-92.42,Groceries,Groceries,Expense,False,116
-2025-02-23,MICRO CENTER #181 RETAIL,-56.75,Entertainment,Shopping,Expense,False,117
-2025-02-22,Spotify USA,-5.99,Eating Out,Bills & Utilities,Expense,False,118
-2025-02-22,SP LIQUID I.V.,-69.96,Groceries,Groceries,Expense,False,119
-2025-02-21,AMAZON MKTPL*BC6FT8EH3,-9.88,Eating Out,Shopping,Expense,True,120
-2025-02-22,KRISERS BELLEVIEW,-36.11,Eating Out,Shopping,Expense,False,121
-2025-02-22,PAYPAL *ULTASALONCO,-34.12,Shopping,Shopping,Expense,False,122
-2025-02-22,KING SOOPERS #0100,-40.76,Groceries,Groceries,Expense,False,123
-2025-02-19,CHIPOTLE 0007,-24.08,Eating Out,Food & Drink,Expense,False,124
-2025-02-20,Amazon.com*BQ5UC1PM3,-23.2,Cat,Shopping,Expense,True,125
-2025-02-19,TARGET.COM  *,-47.34,Health,Shopping,Expense,False,126
-2025-02-20,Amazon.com*AE57D7F23,-10.26,Shopping,Shopping,Expense,True,127
-2025-02-18,BLINK CHARGING CO,-6.86,Eating Out,Automotive,Expense,False,128
-2025-02-16,DENVER ZOO STORE,-15.0,Entertainment,Shopping,Expense,False,129
-2025-02-16,TRADER JOE S #300,-27.01,Groceries,Groceries,Expense,False,130
-2025-02-16,TST*SPICE ROOM - COLFAX,-25.0,Eating Out,Food & Drink,Expense,False,131
-2025-02-16,EINSTEIN BROS BAGELS3623,-16.48,Eating Out,Food & Drink,Expense,False,132
-2025-02-15,AMAZON MKTPL*2U5932AI3,-17.39,Eating Out,Shopping,Expense,True,133
-2025-02-10,Stampede,-200.0,Dance,Food & Drink,Expense,False,134
-2025-02-10,Stampede,-20.0,Dance,Food & Drink,Expense,False,135
-2025-02-10,TST* A BIT TWISTED BREWPU,-18.0,Eating Out,Food & Drink,Expense,False,136
-2025-02-09,TRADER JOE S #303,-137.58,Groceries,Groceries,Expense,False,137
-2025-02-10,TARGET.COM  *,-38.53,Eating Out,Shopping,Expense,False,138
-2025-02-09,TACO BELL 033864,-5.0,Eating Out,Food & Drink,Expense,False,139
-2025-02-10,VZWRLSS*MY VZ VW P,-180.44,Eating Out,Bills & Utilities,Expense,False,140
-2025-02-10,MINT MOBILE,-201.67,Utilities,Bills & Utilities,Expense,False,141
-2025-02-10,A2WEBHOST* INV4661126,-19.99,Eating Out,Professional Services,Expense,False,142
-2025-02-07,PAYPAL *MACCOSMETIC,-19.03,Eating Out,Shopping,Expense,False,143
-2025-02-05,LASTPASS.COM,-36.0,Utilities,Shopping,Expense,False,144
-2025-02-04,Amazon.com*Z71RB9GT0,-15.82,Entertainment,Shopping,Expense,True,145
-2025-02-03,WASH LAUNDRY MOBILE,-40.0,Utilities,Personal,Expense,False,146
-2025-02-04,PAYPAL *MACCOSMETIC,-38.39,Shopping,Shopping,Expense,False,147
-2025-02-02,BATH &amp; BODY WORKS 3083,-5.04,Eating Out,Shopping,Expense,False,148
-2025-02-02,452 Lush Park Meadows,-5.89,Eating Out,Shopping,Expense,False,149
-2025-02-03,MRS FIELDS COOKIES,-3.41,Eating Out,Food & Drink,Expense,False,150
+date,description,amount,auto_category,bank_category,transaction_type,needs_review
+2025-04-29,TRADER JOE S #303,-48.34,Groceries,Groceries,Expense,False
+2025-04-29,TARGET.COM,-8.67,Shopping,Shopping,Expense,False
+2025-04-28,AMAZON MKTPLACE PMTS,21.49,Amazon,Shopping,Income,True
+2025-04-28,SP LIQUID I.V.,-69.96,Groceries,Groceries,Expense,False
+2025-04-29,TARGET.COM  *,-38.17,Shopping,Shopping,Expense,False
+2025-04-26,SEPHORA PARK MEADOWS,-53.85,Shopping,Shopping,Expense,False
+2025-04-27,DOLLAR TREE,-2.69,Shopping,Shopping,Expense,False
+2025-04-27,AMAZON MKTPL*NB48D2ZO2,-14.68,Amazon,Shopping,Expense,True
+2025-04-27,MAC Park Meadows,-18.83,Shopping,Shopping,Expense,False
+2025-04-24,SOUTHWES    5262337696089,-4.0,Travel,Travel,Expense,False
+2025-04-23,BENEDICT'S RESTAURANT CO,-30.0,Eating Out,Food & Drink,Expense,False
+2025-04-23,CIRCLE K # 44099,-6.08,Gas,Gas,Expense,False
+2025-04-23,STEAMGAMES.COM 4259522985,-49.99,Entertainment,Entertainment,Expense,False
+2025-04-23,AMAZON MKTPLACE PMTS,21.81,Amazon,Shopping,Income,True
+2025-04-22,AMAZON MKTPLACE PMTS,43.65,Amazon,Shopping,Income,True
+2025-04-22,AMAZON MKTPLACE PMTS,25.98,Amazon,Shopping,Income,True
+2025-04-23,AMAZON MKTPLACE PMTS,29.46,Amazon,Shopping,Income,True
+2025-04-22,DEN PUBLIC PARKING,-32.0,Travel,Travel,Expense,False
+2025-04-22,CHIPOTLE 0007,-23.38,Food & Drink,Food & Drink,Expense,False
+2025-04-22,Spotify USA,-5.99,Bills & Utilities,Bills & Utilities,Expense,False
+2025-04-18,QFC #5808,-30.69,Groceries,Groceries,Expense,False
+2025-04-18,QFC #5808,-28.9,Groceries,Groceries,Expense,False
+2025-04-18,GEICO  *AUTO,-331.83,Bills & Utilities,Bills & Utilities,Expense,False
+2025-04-18,EINSTEIN KIOSK - DEN,-6.04,Food & Drink,Food & Drink,Expense,False
+2025-04-18,SQ *CAFE AN?CLAIR,-5.0,Eating Out,Food & Drink,Expense,False
+2025-04-18,TST*ITADAKI BELLEVUE,-24.0,Food & Drink,Food & Drink,Expense,False
+2025-04-18,IKON PASS,-229.0,Entertainment,Entertainment,Expense,False
+2025-04-18,Denver Zoo,-104.0,Gifts & Donations,Gifts & Donations,Expense,False
+2025-04-17,CHIPOTLE 0007,-12.85,Food & Drink,Food & Drink,Expense,False
+2025-04-17,Amazon.com*322QT8FY3,-17.39,Amazon,Shopping,Expense,True
+2025-04-16,MANITOU PARKING SEC A,-6.0,Travel,Travel,Expense,False
+2025-04-15,RMNP BEAVER MEADOWS VISIT,-7.0,Shopping,Shopping,Expense,False
+2025-04-15,ESTES PARK MOUNTAIN SHOP,-18.65,Shopping,Shopping,Expense,False
+2025-04-17,TARGET.COM  *,0.29,Shopping,Shopping,Income,False
+2025-04-15,TRENDZ RETAIL,-20.64,Shopping,Shopping,Expense,False
+2025-04-16,EINSTEIN BROS BAGELS2646,-8.12,Food & Drink,Food & Drink,Expense,False
+2025-04-16,MANITOU BREWING COMPAN,-30.0,Food & Drink,Food & Drink,Expense,False
+2025-04-15,BUC-EE'S #60,-88.8,Groceries,Groceries,Expense,False
+2025-04-15,SQ *WILD SPIRITS  LTD.,-41.31,Shopping,Shopping,Expense,False
+2025-04-15,FBF ESTES PARK,-6.49,Shopping,Shopping,Expense,False
+2025-04-15,DOLLARTREE,-5.44,Shopping,Shopping,Expense,False
+2025-04-15,AMAZON MKTPL*9N5ED4FG3,-65.75,Amazon,Shopping,Expense,True
+2025-04-14,AMAZON MKTPL*8U6QY12V3,-15.0,Amazon,Shopping,Expense,True
+2025-04-14,TST* ALOY MODERN THAI - D,-120.0,Eating Out,Food & Drink,Expense,False
+2025-04-14,AMAZON MKTPL*PW7557083,-25.89,Amazon,Shopping,Expense,True
+2025-04-10,AMAZON MKTPL*2R5501S83,-29.75,Amazon,Shopping,Expense,True
+2025-04-09,AMAZON MKTPL*6N1N20ZF3,-26.27,Amazon,Shopping,Expense,True
+2025-04-08,Audible*GF0Y08RS3,-0.99,Bills & Utilities,Bills & Utilities,Expense,False
+2025-04-07,TARGET        00028209,-2.89,Shopping,Shopping,Expense,False
+2025-04-07,Amazon.com*MV8N057B3,-28.13,Amazon,Shopping,Expense,True
+2025-04-07,TARGET.COM  *,-36.02,Shopping,Shopping,Expense,False
+2025-04-07,AMAZON MKTPL*KA1LG3R23,-143.94,Amazon,Shopping,Expense,True
+2025-04-06,SALLY BEAUTY #0802,-25.92,Shopping,Shopping,Expense,False
+2025-04-06,TRADER JOE S #303,-86.91,Groceries,Groceries,Expense,False
+2025-04-07,PAYPAL *CHEWY INC,-22.73,Shopping,Shopping,Expense,False
+2025-04-07,AGODA.COM FIELD STAT,-257.66,Travel,Travel,Expense,False
+2025-04-06,PAYPAL *CHEWY INC,-151.67,Shopping,Shopping,Expense,False
+2025-04-07,TARGET.COM  *,-6.73,Shopping,Shopping,Expense,False
+2025-04-03,MICRO CENTER #181 RETAIL,-65.48,Shopping,Shopping,Expense,False
+2025-04-05,TARGET.COM,-31.58,Shopping,Shopping,Expense,False
+2025-04-02,FINN MCCOOLS BAR  GRILL,-20.0,Eating Out,Food & Drink,Expense,False
+2025-04-01,PUBLIC WORKS-PRKG METR,-1.0,Travel,Travel,Expense,False
+2025-04-01,TST*QUINCE COFFEE,-12.28,Eating Out,Food & Drink,Expense,False
+2025-04-01,PUBLIC WORKS-PRKG METR,-1.0,Travel,Travel,Expense,False
+2025-04-01,SHELL OIL 57443811203,-30.09,Gas,Gas,Expense,False
+2025-04-01,TST*CITYO MAKEBELIEVE,-16.0,Food & Drink,Food & Drink,Expense,False
+2025-04-01,TST*VOODOO DOUGHNUT - DE,-2.46,Food & Drink,Food & Drink,Expense,False
+2025-04-01,SP MINDS EYE CRYSTALS,-6.07,Shopping,Shopping,Expense,False

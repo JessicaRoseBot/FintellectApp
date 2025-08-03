@@ -1,4 +1,4 @@
-# Fintellect 
+# Fintellect
 A data-driven personal finance app that transforms raw bank statements into actionable spending insights using smart categorization, trend forecasting, and anomaly detection.
 
 ### General Description
@@ -18,7 +18,7 @@ Progress feedback during processing
 Error handling for malformed CSV files
 Temporary storage of processed data in session** (unsure how possible this is to expand on)
 
-[Wireframe description: File upload button → Processing spinner → Basic categorization table] 
+[Wireframe description: File upload button → Processing spinner → Basic categorization table]
 #### 2. Category Review and Adjustment
 After initial processing, Sarah reviews the automatic categorizations. She notices "Amazon" transactions were all categorized as "Shopping" but wants to split them between "Books" and "Electronics".
 Following CSV import, user is able to adjust the data in a spreadsheet-like view and re-categorize purchases as needed.
@@ -28,7 +28,7 @@ Category override interface
 Session persistence of user changes** (unsure how possible this is)
 Undo/redo capability for corrections
 
-[Wireframe description: Table view with category dropdowns + "Apply Changes" button] 
+[Wireframe description: Table view with category dropdowns + "Apply Changes" button]
 #### 3. Dashboard Visualization
 With her data categorized, Sarah views her monthly spending dashboard. Interactive pie charts show category breakdowns, while line graphs display spending trends over time. She hovers over chart elements to see exact amounts and can click to drill down into specific categories or time periods.
 Technical Details:
@@ -47,18 +47,18 @@ Time period selectors (at least an indication of more data, like $ amounts behin
 #### Technical Flow
 Input Handling
 Web: File upload → Flask endpoint → pandas DataFrame
-(Future) CLI: File path argument → same DataFrame processing 
+(Future) CLI: File path argument → same DataFrame processing
 Processing Pipeline
 CSV sanitization (handle bank-specific formats)
 Transaction categorization engine
 Rule-based matcher (predefined patterns)
 User override storage
 Monthly aggregation
-Budget comparison 
+Budget comparison
 Visualization Layer
 Plotly figure generation
 Dashboard layout assembly
-Interactive element handlers 
+Interactive element handlers
 Output
 HTML dashboard rendering
 Export file generation

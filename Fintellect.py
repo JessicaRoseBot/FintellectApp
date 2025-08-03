@@ -1,3 +1,4 @@
+# Import all necessary packages
 import os
 import pandas as pd
 from flask import Flask, render_template, request, flash, redirect, url_for
@@ -35,7 +36,7 @@ def process_statement(file_stream):
     # Standardize column names
     df.columns = [col.lower().strip() for col in df.columns]
     
-    # Field mapping specific to Chase format
+    # Field mapping specific to Chase Bank export format
     column_mapping = {
         'transaction date': 'date',
         'description': 'description',
@@ -57,7 +58,7 @@ def process_statement(file_stream):
     df['amount'] = df['amount'].replace(r'[\$,]', '', regex=True).astype(float)
     df['date'] = pd.to_datetime(df['date'])
     
-    # Enhanced categorization
+    # Enhanced categorization (work in progress)
     food_keywords = ['restaurant', 'cafe', 'coffee', 'bar', 'grill', 'eat', 'food', 'dining',
                    'pizza', 'burger', 'starbucks', 'peets', 'egg', 'thai', 'grill', 'panda']
     
@@ -97,6 +98,7 @@ def process_statement(file_stream):
 # Routes
 # ======================
 
+# Upload file function, allow user search PC for CSV files
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
@@ -133,6 +135,7 @@ def upload_file():
     
     return render_template('upload.html')
 
+# Dashboard view of uploaded CSV data plotted by amount and dates
 @app.route('/dashboard')
 def dashboard():
     try:
@@ -149,7 +152,7 @@ def dashboard():
         if missing:
             raise ValueError(f"Missing columns: {', '.join(missing)}")
         
-        # Define color scheme
+        # Budget categories with colors assigned for pie chart
         category_colors = {
             'Eating Out': '#8a3ffc',
             'Groceries': '#007d79',
@@ -192,7 +195,7 @@ def dashboard():
             plot_bgcolor='rgba(0,0,0,0)'
         ).to_html(full_html=False)
         
-        # 2. Time Series Charts
+        # 2. Time Series Charts 
         if 'date' in df.columns:
             df['date'] = pd.to_datetime(df['date'])
             
@@ -209,7 +212,19 @@ def dashboard():
                 color_discrete_sequence=['#007d79']
             ).update_layout(
                 plot_bgcolor='rgba(0,0,0,0)',
-                paper_bgcolor='rgba(0,0,0,0)'
+                paper_bgcolor='rgba(0,0,0,0)',
+
+                # Grid lines on timeline charts
+                xaxis=dict(
+                    showgrid=True,
+                    gridcolor='rgba(200, 200, 200, 0.3)',
+                    gridwidth=1
+                ),
+                yaxis=dict(
+                    showgrid=True,
+                    gridcolor='rgba(200, 200, 200, 0.3)',
+                    gridwidth=1
+                )
             ).to_html(full_html=False)
             
             # Cumulative Expenses
@@ -222,7 +237,18 @@ def dashboard():
                 color_discrete_sequence=['#007d79']
             ).update_layout(
                 plot_bgcolor='rgba(0,0,0,0)',
-                paper_bgcolor='rgba(0,0,0,0)'
+                paper_bgcolor='rgba(0,0,0,0)',
+                # ADDED GRID LINES CONFIGURATION:
+                xaxis=dict(
+                    showgrid=True,
+                    gridcolor='rgba(200, 200, 200, 0.3)',
+                    gridwidth=1
+                ),
+                yaxis=dict(
+                    showgrid=True,
+                    gridcolor='rgba(200, 200, 200, 0.3)',
+                    gridwidth=1
+                )
             ).to_html(full_html=False)
             
             # Combined Chart
@@ -242,15 +268,27 @@ def dashboard():
                 color_discrete_sequence=['#007d79', '#d12771']
             ).update_layout(
                 plot_bgcolor='rgba(0,0,0,0)',
-                paper_bgcolor='rgba(0,0,0,0)'
+                paper_bgcolor='rgba(0,0,0,0)',
+                # ADDED GRID LINES CONFIGURATION:
+                xaxis=dict(
+                    showgrid=True,
+                    gridcolor='rgba(200, 200, 200, 0.3)',
+                    gridwidth=1
+                ),
+                yaxis=dict(
+                    showgrid=True,
+                    gridcolor='rgba(200, 200, 200, 0.3)',
+                    gridwidth=1
+                )
             ).to_html(full_html=False)
-        
+            
         return render_template('dashboard.html', charts=charts)
         
     except Exception as e:
         flash(f'Dashboard error: {str(e)}', 'error')
         return redirect(url_for('upload_file'))
-
+    
+# Edit page where user can revise budget categories
 @app.route('/results')
 def show_results():
     filepath = os.path.join(app.config['UPLOAD_FOLDER'], 'processed.csv')
