@@ -73,7 +73,7 @@ date,amount,description,transaction_type,auto_category
 ## 🚀 How to Use the Application
 ### 1. Launch the Application
 ```bash
-python app.py
+python Fintellect.py
 ```
 The application will start at http://localhost:8000
 
